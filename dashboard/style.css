@@ -1,0 +1,158 @@
+:root {
+  color-scheme: dark;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #101418;
+  color: #f4f7fb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #101418;
+}
+
+.shell {
+  width: min(1100px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 28px 0;
+}
+
+.topbar,
+.status-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.topbar {
+  margin-bottom: 24px;
+}
+
+.label {
+  margin: 0 0 6px;
+  color: #95a3b8;
+  font-size: 14px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.connection {
+  min-width: 132px;
+  border: 1px solid #344256;
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: #d9e2ef;
+  text-align: center;
+}
+
+.connection.live {
+  border-color: #2f9e68;
+  color: #51d88a;
+}
+
+.connection.error {
+  border-color: #c84444;
+  color: #ff7b7b;
+}
+
+.status-panel {
+  margin-bottom: 18px;
+  border: 1px solid #263241;
+  border-radius: 8px;
+  padding: 18px;
+  background: #171d25;
+}
+
+.status-value {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.timestamp {
+  margin: 0;
+  color: #aeb9c8;
+}
+
+.message {
+  margin: 6px 0 0;
+  max-width: 360px;
+  color: #7f8ca0;
+  font-size: 13px;
+  text-align: right;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.metric {
+  min-height: 145px;
+  border: 1px solid #263241;
+  border-radius: 8px;
+  padding: 18px;
+  background: #171d25;
+}
+
+.metric span {
+  display: block;
+  color: #aeb9c8;
+  font-size: 15px;
+}
+
+.metric strong {
+  display: block;
+  margin: 16px 0 4px;
+  font-size: 34px;
+  line-height: 1;
+}
+
+.metric small {
+  color: #7f8ca0;
+  font-size: 14px;
+}
+
+.status-normal {
+  color: #51d88a;
+}
+
+.status-warning {
+  color: #ffd166;
+}
+
+.status-danger {
+  color: #ff7b7b;
+}
+
+@media (max-width: 760px) {
+  .topbar,
+  .status-panel {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .message {
+    text-align: left;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 460px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
