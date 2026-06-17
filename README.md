@@ -14,14 +14,6 @@
 - Basic Alert System
 - Test Data / Mock Data
 
-ยังไม่รวม:
-
-- Mobile app
-- Cloud system
-- Login system
-- Full motor control algorithm
-- Hardware protocol ขั้นสุดท้าย
-
 ## 3. Main Modules
 
 ### 3.1 Telemetry
@@ -34,6 +26,7 @@
 
 ข้อมูลที่ต้องรับ:
 
+- timestamp
 - speed
 - batteryVoltage
 - batteryPercent
@@ -42,7 +35,6 @@
 - motorTemp
 - controllerTemp
 - status
-- timestamp
 
 ### 3.2 Dashboard
 
@@ -63,36 +55,13 @@
 - Controller Temperature
 - Status
 
-สีสถานะ:
-
-- NORMAL = เขียว
-- LOW_BATTERY = เหลือง
-- OVERHEATING = ส้ม/แดง
-- CRITICAL = แดง
-
 ### 3.3 Logger
 
 หน้าที่:
 
 - บันทึก telemetry ระหว่างการทดสอบ
 - เก็บข้อมูลเป็นไฟล์สำหรับวิเคราะห์ย้อนหลัง
-
-Format เริ่มต้น:
-
-- CSV
-- JSONL
-
-กติกา:
-
-- บันทึกอย่างน้อย 1 ครั้งต่อวินาที
-- 1 test run = 1 log file
-- ชื่อไฟล์ควรมีวันที่และเวลา
-
-ตัวอย่างชื่อไฟล์:
-
-```text
-run_2026-06-17_2230.csv
-```
+- เตรียมข้อมูลให้ทีมใช้ดู performance หลังจบรอบทดสอบ
 
 ### 3.4 Alert System
 
@@ -100,47 +69,21 @@ run_2026-06-17_2230.csv
 
 - ประเมินสถานะรถจากข้อมูล telemetry
 - ส่งสถานะให้ dashboard แสดงผล
+- ช่วยให้ทีมเห็นความผิดปกติได้เร็วขึ้น
 
 สถานะเริ่มต้น:
 
-```text
-NORMAL
-LOW_BATTERY
-OVERHEATING
-BATTERY_CRITICAL
-OVERHEATING_CRITICAL
-```
-
-เงื่อนไขเริ่มต้น:
-
-```text
-batteryPercent < 20       -> LOW_BATTERY
-batteryPercent < 5        -> BATTERY_CRITICAL
-motorTemp > 80            -> OVERHEATING
-controllerTemp > 80       -> OVERHEATING
-motorTemp > 85            -> OVERHEATING_CRITICAL
-controllerTemp > 85       -> OVERHEATING_CRITICAL
-```
+- NORMAL
+- LOW_BATTERY
+- OVERHEATING
+- BATTERY_CRITICAL
+- OVERHEATING_CRITICAL
 
 ## 4. Data Format
 
-Prototype ใช้ JSON ก่อน
+Prototype ใช้ JSON เป็น format หลักในช่วงแรก เพื่อให้อ่านง่าย ทดสอบง่าย และเชื่อมต่อกับ dashboard/logger ได้เร็ว
 
-ตัวอย่าง:
-
-```json
-{
-  "timestamp": "2026-06-17T22:30:00",
-  "speed": 32.5,
-  "batteryVoltage": 48.2,
-  "batteryPercent": 76,
-  "current": 12.1,
-  "power": 583.2,
-  "motorTemp": 41,
-  "controllerTemp": 38,
-  "status": "NORMAL"
-}
-```
+ข้อมูล telemetry หนึ่งชุดควรแทนสถานะของรถ ณ เวลานั้น และต้องมี field ตามที่กำหนดในหัวข้อ Data Fields
 
 ## 5. Data Fields
 
@@ -162,30 +105,15 @@ Prototype ใช้ JSON ก่อน
 
 Mock telemetry ต้องทำได้:
 
-- สร้างข้อมูลใหม่ทุก 1 วินาที
-- speed เปลี่ยนขึ้นลง
-- batteryPercent ลดลงเรื่อย ๆ
-- current เปลี่ยนตาม speed
-- power คำนวณจาก voltage x current
+- สร้างข้อมูลใหม่เป็นช่วงเวลา
+- speed เปลี่ยนขึ้นลงได้
+- batteryPercent ลดลงได้
+- current เปลี่ยนตามสภาพการวิ่ง
+- power คำนวณจาก voltage และ current
 - temperature เปลี่ยนตาม current
 - status เปลี่ยนตาม condition
 
-สูตรเริ่มต้น:
-
-```text
-speed = speed + random(-5, +5)
-speed อยู่ระหว่าง 0 ถึง 45
-
-batteryPercent = batteryPercent - random(0.1, 0.5)
-batteryPercent อยู่ระหว่าง 0 ถึง 100
-
-batteryVoltage = 42 + (batteryPercent / 100) * 12
-
-current = 2 + (speed / 45) * 18 + random(-1, +1)
-current อยู่ระหว่าง 0 ถึง 25
-
-power = batteryVoltage * current
-```
+เป้าหมายของ mock telemetry คือให้ทีม software พัฒนา dashboard, logger และ alert system ได้โดยไม่ต้องรอรถจริง
 
 ## 7. Repository Structure
 
@@ -198,13 +126,13 @@ ecomilelab-software/
 └─ test-data/
 ```
 
-## 9. Definition of Done v0.1
+## 8. Definition of Done v0.1
 
 ถือว่า Software v0.1 เสร็จเมื่อ:
 
 - mock telemetry สร้างข้อมูลได้
 - dashboard แสดงค่าจาก telemetry ได้
-- logger บันทึกข้อมูลเป็น CSV ได้
-- มี test-data อย่างน้อย 3 scenario
+- logger บันทึกข้อมูลได้
+- มี test-data สำหรับทดสอบระบบ
 - มี documentation อธิบาย data format
-- ทุกอย่างรันได้จาก README
+- ทุกอย่างรันได้จากคำอธิบายใน README
