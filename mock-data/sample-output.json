@@ -1,0 +1,12 @@
+{
+  "device_id": "esp32_01",
+  "timestamp": 1700000000123,
+  "session": "test_001",
+  "data": {
+    "current_A": 7.42,
+    "temp_C": 41.86,
+    "speed_rpm": 1840,
+    "battery_V": 48.37
+  },
+  "status": "ok"
+}
