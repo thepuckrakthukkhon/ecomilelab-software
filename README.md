@@ -7,7 +7,6 @@ Software prototype for EcoMileLab telemetry, dashboard, and data logging.
 - Telemetry Receiver
 - Dashboard
 - Data Logger
-- Alert System
 
 ## Current Status
 
