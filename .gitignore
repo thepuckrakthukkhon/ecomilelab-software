@@ -4,3 +4,4 @@ __pycache__/
 test-data/latest_telemetry.json
 test-data/telemetry_history.json
 test-data/runs/
+test-data/logs/
