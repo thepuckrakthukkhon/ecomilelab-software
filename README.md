@@ -136,3 +136,39 @@ ecomilelab-software/
 - มี test-data สำหรับทดสอบระบบ
 - มี documentation อธิบาย data format
 - ทุกอย่างรันได้จากคำอธิบายใน README
+
+## 9. Running the CSV Logger
+
+Start mock telemetry first so `test-data/telemetry_history.json` is updated:
+
+```powershell
+python telemetry/mock_telemetry.py
+```
+
+In another terminal, start the logger:
+
+```powershell
+python logger/csv_logger.py
+```
+
+The logger appends telemetry records from `test-data/telemetry_history.json` to
+`test-data/logs/telemetry_<run-time>.csv`. If you start the logger after mock
+telemetry has already been running, it backfills the records already in history
+and then keeps adding new records.
+Each row includes:
+
+- timestamp
+- speed
+- batteryVoltage
+- batteryPercent
+- current
+- power
+- motorTemp
+- controllerTemp
+- status
+
+For a short local check, stop after a fixed number of records:
+
+```powershell
+python logger/csv_logger.py --max-records 5
+```
