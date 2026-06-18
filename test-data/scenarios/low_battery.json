@@ -1,0 +1,38 @@
+[
+  {
+    "timestamp": "2026-06-18T13:25:00",
+    "runId": "sample-low-battery",
+    "speed": 21.0,
+    "batteryVoltage": 44.4,
+    "batteryPercent": 18.5,
+    "current": 11.2,
+    "power": 497.28,
+    "motorTemp": 43.2,
+    "controllerTemp": 41.5,
+    "status": "LOW_BATTERY"
+  },
+  {
+    "timestamp": "2026-06-18T13:25:01",
+    "runId": "sample-low-battery",
+    "speed": 17.8,
+    "batteryVoltage": 43.5,
+    "batteryPercent": 9.8,
+    "current": 9.6,
+    "power": 417.6,
+    "motorTemp": 44.0,
+    "controllerTemp": 42.1,
+    "status": "LOW_BATTERY"
+  },
+  {
+    "timestamp": "2026-06-18T13:25:02",
+    "runId": "sample-low-battery",
+    "speed": 10.2,
+    "batteryVoltage": 42.2,
+    "batteryPercent": 4.7,
+    "current": 5.4,
+    "power": 227.88,
+    "motorTemp": 44.4,
+    "controllerTemp": 42.6,
+    "status": "BATTERY_CRITICAL"
+  }
+]

@@ -175,3 +175,17 @@ For a short local check, stop after a fixed number of records:
 ```powershell
 python logger/csv_logger.py --max-records 5
 ```
+
+## 10. Sample Telemetry Scenarios
+
+Reusable scenario data lives in `test-data/scenarios/`.
+
+- `normal_run.json`
+- `low_battery.json`
+- `overheating.json`
+
+Use a scenario with the logger:
+
+```powershell
+python logger/csv_logger.py --source test-data/scenarios/low_battery.json --max-records 3
+```

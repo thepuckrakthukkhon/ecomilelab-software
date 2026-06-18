@@ -1,0 +1,38 @@
+[
+  {
+    "timestamp": "2026-06-18T13:30:00",
+    "runId": "sample-overheating",
+    "speed": 32.5,
+    "batteryVoltage": 50.8,
+    "batteryPercent": 76.4,
+    "current": 22.7,
+    "power": 1153.16,
+    "motorTemp": 61.2,
+    "controllerTemp": 58.7,
+    "status": "TEMP_WARM"
+  },
+  {
+    "timestamp": "2026-06-18T13:30:01",
+    "runId": "sample-overheating",
+    "speed": 35.8,
+    "batteryVoltage": 50.5,
+    "batteryPercent": 75.9,
+    "current": 24.4,
+    "power": 1232.2,
+    "motorTemp": 72.4,
+    "controllerTemp": 68.8,
+    "status": "TEMP_HOT"
+  },
+  {
+    "timestamp": "2026-06-18T13:30:02",
+    "runId": "sample-overheating",
+    "speed": 29.1,
+    "batteryVoltage": 50.1,
+    "batteryPercent": 75.1,
+    "current": 23.8,
+    "power": 1192.38,
+    "motorTemp": 82.6,
+    "controllerTemp": 79.4,
+    "status": "OVERHEATING"
+  }
+]
