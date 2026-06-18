@@ -1,4 +1,4 @@
-# EcoMileLab Status Rules
+# Mocktelemetry for Learning Status Rules
 
 This document defines the prototype alert/status rules used by telemetry,
 dashboard, and logger data.

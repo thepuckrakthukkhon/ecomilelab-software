@@ -1,192 +1,159 @@
-# EcoMileLab Software Specs v0.1
+# Mocktelemetry for Learning
 
-## 1. Goal
+Mocktelemetry for Learning is a small learning project for understanding how a
+vehicle telemetry software stack works before real hardware is ready.
 
-ระบบ Software ของ EcoMileLab มีหน้าที่รับข้อมูลจากรถ แสดงผลแบบ real-time และบันทึกข้อมูลการทดสอบ เพื่อนำไปวิเคราะห์ประสิทธิภาพ พลังงาน และความปลอดภัยของรถ
+The project simulates telemetry data, displays it in a dashboard, saves it to
+CSV logs, defines status/alert rules, and provides reusable test scenarios.
+It is intentionally beginner-friendly so each module can be studied, changed,
+run, and tested one step at a time.
 
-## 2. Scope
+## Learning Goals
 
-เวอร์ชันแรกของ software จะโฟกัสที่:
+Use this project to practice:
 
-- Telemetry
-- Dashboard
-- Data Logging
-- Basic Alert System
-- Test Data / Mock Data
+- Python data generation and file I/O
+- JSON telemetry data formats
+- CSV logging
+- JavaScript dashboard updates with `fetch`
+- Basic alert/status rules
+- Test data scenarios and edge cases
+- Git branches, pull requests, and issue-based workflow
+- Writing clear software documentation
 
-## 3. Main Modules
+## Current Scope
 
-### 3.1 Telemetry
+This project is focused on mock telemetry only. It does not connect to real
+ESP32, Arduino, sensors, motor controllers, or BMS hardware yet.
 
-หน้าที่:
+Current modules:
 
-- รับข้อมูลจากรถหรือ mock data
-- ตรวจว่า data format ถูกต้อง
-- ส่งข้อมูลต่อให้ dashboard และ logger
+- `telemetry/` - generates mock vehicle telemetry
+- `dashboard/` - displays the latest telemetry values
+- `logger/` - saves telemetry history to CSV
+- `alert/` - defines status and severity rules
+- `test-data/scenarios/` - reusable sample telemetry scenarios
+- `docs/` - data format and status rule documentation
 
-ข้อมูลที่ต้องรับ:
-
-- timestamp
-- speed
-- batteryVoltage
-- batteryPercent
-- current
-- power
-- motorTemp
-- controllerTemp
-- status
-
-### 3.2 Dashboard
-
-หน้าที่:
-
-- แสดงข้อมูลรถแบบ real-time
-- แสดงสถานะระบบ
-- ใช้สีช่วยบอกความผิดปกติ
-
-ค่าที่ต้องแสดง:
-
-- Speed
-- Battery %
-- Battery Voltage
-- Current
-- Power
-- Motor Temperature
-- Controller Temperature
-- Status
-
-### 3.3 Logger
-
-หน้าที่:
-
-- บันทึก telemetry ระหว่างการทดสอบ
-- เก็บข้อมูลเป็นไฟล์สำหรับวิเคราะห์ย้อนหลัง
-- เตรียมข้อมูลให้ทีมใช้ดู performance หลังจบรอบทดสอบ
-
-### 3.4 Alert System
-
-หน้าที่:
-
-- ประเมินสถานะรถจากข้อมูล telemetry
-- ส่งสถานะให้ dashboard แสดงผล
-- ช่วยให้ทีมเห็นความผิดปกติได้เร็วขึ้น
-
-สถานะเริ่มต้น:
-
-- NORMAL
-- LOW_BATTERY
-- OVERHEATING
-- BATTERY_CRITICAL
-- OVERHEATING_CRITICAL
-
-## 4. Data Format
-
-Prototype ใช้ JSON เป็น format หลักในช่วงแรก เพื่อให้อ่านง่าย ทดสอบง่าย และเชื่อมต่อกับ dashboard/logger ได้เร็ว
-
-ข้อมูล telemetry หนึ่งชุดควรแทนสถานะของรถ ณ เวลานั้น และต้องมี field ตามที่กำหนดในหัวข้อ Data Fields
-
-Detailed data format documentation is in
-[`docs/telemetry-data-format.md`](docs/telemetry-data-format.md).
-Status rules are documented in [`docs/status-rules.md`](docs/status-rules.md).
-
-## 5. Data Fields
-
-| Field | Type | Unit | Description |
-| --- | --- | --- | --- |
-| timestamp | string | ISO time | เวลาที่ข้อมูลถูกสร้าง |
-| speed | number | km/h | ความเร็วรถ |
-| batteryVoltage | number | V | แรงดันแบตเตอรี่ |
-| batteryPercent | number | % | เปอร์เซ็นต์แบตเตอรี่ |
-| current | number | A | กระแสไฟฟ้า |
-| power | number | W | กำลังไฟฟ้า |
-| motorTemp | number | deg C | อุณหภูมิมอเตอร์ |
-| controllerTemp | number | deg C | อุณหภูมิ controller |
-| status | string | - | สถานะระบบ |
-
-## 6. Mock Telemetry
-
-ก่อน hardware พร้อม ให้ใช้ mock telemetry เพื่อจำลองข้อมูลรถ
-
-Mock telemetry ต้องทำได้:
-
-- สร้างข้อมูลใหม่เป็นช่วงเวลา
-- speed เปลี่ยนขึ้นลงได้
-- batteryPercent ลดลงได้
-- current เปลี่ยนตามสภาพการวิ่ง
-- power คำนวณจาก voltage และ current
-- temperature เปลี่ยนตาม current
-- status เปลี่ยนตาม condition
-
-เป้าหมายของ mock telemetry คือให้ทีม software พัฒนา dashboard, logger และ alert system ได้โดยไม่ต้องรอรถจริง
-
-## 7. Repository Structure
+## Repository Structure
 
 ```text
-ecomilelab-software/
-├─ telemetry/
+mocktelemetry-for-learning/
+├─ alert/
 ├─ dashboard/
-├─ logger/
 ├─ docs/
+├─ logger/
+├─ telemetry/
 └─ test-data/
 ```
 
-## 8. Definition of Done v0.1
+## Telemetry Fields
 
-ถือว่า Software v0.1 เสร็จเมื่อ:
+Each telemetry record uses these main fields:
 
-- mock telemetry สร้างข้อมูลได้
-- dashboard แสดงค่าจาก telemetry ได้
-- logger บันทึกข้อมูลได้
-- มี test-data สำหรับทดสอบระบบ
-- มี documentation อธิบาย data format
-- ทุกอย่างรันได้จากคำอธิบายใน README
+| Field | Meaning |
+| --- | --- |
+| `timestamp` | Time when the telemetry record was generated. |
+| `speed` | Vehicle speed in km/h. |
+| `batteryVoltage` | Battery voltage in V. |
+| `batteryPercent` | Battery percentage from 0 to 100. |
+| `current` | Electrical current in A. |
+| `power` | Electrical power in W. |
+| `motorTemp` | Motor temperature in deg C. |
+| `controllerTemp` | Controller temperature in deg C. |
+| `status` | Alert/status value such as `NORMAL` or `LOW_BATTERY`. |
 
-## 9. Running the CSV Logger
+Detailed documentation:
 
-Start mock telemetry first so `test-data/telemetry_history.json` is updated:
+- [Telemetry data format](docs/telemetry-data-format.md)
+- [Status rules](docs/status-rules.md)
+
+## Run Mock Telemetry
+
+Run the mock telemetry generator:
 
 ```powershell
 python telemetry/mock_telemetry.py
 ```
 
-In another terminal, start the logger:
+It writes:
+
+- `test-data/latest_telemetry.json`
+- `test-data/telemetry_history.json`
+- `test-data/runs/run_<time>.json`
+
+## Run Dashboard
+
+Start the dashboard helper:
+
+```powershell
+.\start_dashboard.ps1
+```
+
+Then open:
+
+```text
+http://localhost:8000/dashboard/
+```
+
+The dashboard reads `test-data/latest_telemetry.json`.
+
+## Run CSV Logger
+
+Start mock telemetry first, then run:
 
 ```powershell
 python logger/csv_logger.py
 ```
 
-The logger appends telemetry records from `test-data/telemetry_history.json` to
-`test-data/logs/telemetry_<run-time>.csv`. If you start the logger after mock
-telemetry has already been running, it backfills the records already in history
-and then keeps adding new records.
-Each row includes:
+The logger reads `test-data/telemetry_history.json` and writes CSV files under:
 
-- timestamp
-- speed
-- batteryVoltage
-- batteryPercent
-- current
-- power
-- motorTemp
-- controllerTemp
-- status
+```text
+test-data/logs/
+```
 
-For a short local check, stop after a fixed number of records:
+For a short check:
 
 ```powershell
 python logger/csv_logger.py --max-records 5
 ```
 
-## 10. Sample Telemetry Scenarios
+## Use Sample Scenarios
 
-Reusable scenario data lives in `test-data/scenarios/`.
+Reusable scenario data lives in `test-data/scenarios/`:
 
 - `normal_run.json`
 - `low_battery.json`
 - `overheating.json`
 
-Use a scenario with the logger:
+Run the logger with a scenario:
 
 ```powershell
 python logger/csv_logger.py --source test-data/scenarios/low_battery.json --max-records 3
 ```
+
+## Suggested Learning Exercises
+
+Start small. Change one thing, run it, and observe the result.
+
+1. Change `LOW_BATTERY_PERCENT` in `alert/status_rules.py`.
+2. Add a new telemetry field such as `throttle`.
+3. Display the new field in `dashboard/index.html` and `dashboard/app.js`.
+4. Add the new field to `logger/csv_logger.py`.
+5. Update `docs/telemetry-data-format.md`.
+6. Create a new scenario file in `test-data/scenarios/`.
+7. Commit the change on the related module branch and merge it into `main`.
+
+## Definition of Done for This Learning Stage
+
+Mock telemetry learning stage is complete when:
+
+- mock telemetry generates changing JSON data
+- dashboard displays the latest telemetry values
+- logger saves multiple CSV records
+- sample scenarios cover normal, low battery, and overheating cases
+- status rules are documented and shared by the telemetry generator
+- data format docs explain fields, units, status values, and module usage
+
+This stage is complete. The next learning step is connecting mock software
+concepts to real telemetry input such as ESP32 serial data.
