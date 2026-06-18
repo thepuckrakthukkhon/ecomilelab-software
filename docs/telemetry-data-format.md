@@ -69,9 +69,9 @@ Each telemetry object represents one vehicle state snapshot.
 | `TEMP_SHUTDOWN` | Motor output is disabled for cooldown. | Mock motor shutdown has triggered. |
 | `RESTART_READY` | System has cooled enough to restart. | Cooldown delay has completed. |
 
-The exact thresholds live in `telemetry/mock_telemetry.py`. If those thresholds
-change, update this document and any dashboard/logger assumptions in the same
-pull request.
+The exact thresholds live in `alert/status_rules.py` and are documented in
+[`docs/status-rules.md`](status-rules.md). If those thresholds change, update
+this document and any dashboard/logger assumptions in the same pull request.
 
 ## Module Responsibilities
 

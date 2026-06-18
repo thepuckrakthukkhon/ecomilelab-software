@@ -21,17 +21,19 @@ function showValue(id, value) {
 function setStatusColor(status) {
   fields.status.className = "status-value";
 
+  const warningStatuses = new Set([
+    "LOW_BATTERY",
+    "TEMP_WARM",
+    "TEMP_HOT",
+    "RESTART_READY",
+  ]);
+
   if (status === "NORMAL") {
     fields.status.classList.add("status-normal");
     return;
   }
 
-  if (status === "LOW_BATTERY" || status === "TEMP_WARM") {
-    fields.status.classList.add("status-warning");
-    return;
-  }
-
-  if (status === "TEMP_HOT" || status === "OVERHEATING") {
+  if (warningStatuses.has(status)) {
     fields.status.classList.add("status-warning");
     return;
   }

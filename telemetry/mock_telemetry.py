@@ -1,10 +1,15 @@
 import json
 import random
+import sys
 import time
 from datetime import datetime
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
+sys.path.append(str(PROJECT_ROOT))
+
+from alert.status_rules import get_status
+
 TEST_DATA_DIR = PROJECT_ROOT / "test-data"
 RUNS_DIR = TEST_DATA_DIR / "runs"
 LATEST_TELEMETRY_FILE = TEST_DATA_DIR / "latest_telemetry.json"
@@ -52,28 +57,6 @@ telemetry_history = []
 
 def clamp(value, min_value, max_value):
     return max(min_value, min(value, max_value))
-
-
-def get_status(battery_percent, motor_temp, controller_temp, motor_enabled, cooldown_seconds):
-    hottest_temp = max(motor_temp, controller_temp)
-
-    if not motor_enabled and cooldown_seconds >= RESTART_DELAY_SECONDS:
-        return "RESTART_READY"
-    if not motor_enabled:
-        return "TEMP_SHUTDOWN"
-    if hottest_temp >= 90.0:
-        return "TEMP_CRITICAL"
-    if battery_percent < 5.0:
-        return "BATTERY_CRITICAL"
-    if hottest_temp >= 80.0:
-        return "OVERHEATING"
-    if hottest_temp >= 70.0:
-        return "TEMP_HOT"
-    if hottest_temp >= 60.0:
-        return "TEMP_WARM"
-    if battery_percent < 20.0:
-        return "LOW_BATTERY"
-    return "NORMAL"
 
 
 def get_route_input(index, time_left):
