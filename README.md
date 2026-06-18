@@ -85,6 +85,9 @@ Prototype ใช้ JSON เป็น format หลักในช่วงแ�
 
 ข้อมูล telemetry หนึ่งชุดควรแทนสถานะของรถ ณ เวลานั้น และต้องมี field ตามที่กำหนดในหัวข้อ Data Fields
 
+Detailed data format documentation is in
+[`docs/telemetry-data-format.md`](docs/telemetry-data-format.md).
+
 ## 5. Data Fields
 
 | Field | Type | Unit | Description |
