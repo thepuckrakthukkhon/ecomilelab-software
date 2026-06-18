@@ -1,8 +1,8 @@
-# EcoMileLab Telemetry Data Format
+# Mocktelemetry for Learning Telemetry Data Format
 
-This document defines the telemetry JSON format used by the EcoMileLab
-software prototype. The same format is shared by the mock telemetry generator,
-dashboard, logger, and alert/status logic.
+This document defines the telemetry JSON format used by Mocktelemetry for
+Learning. The same format is shared by the mock telemetry generator, dashboard,
+logger, and alert/status logic.
 
 ## Data Flow
 
