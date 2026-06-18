@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoMile Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div>
+        <p class="label">EcoMile telemetry</p>
+        <h1>Live Dashboard</h1>
+      </div>
+      <div id="connection" class="connection">Waiting for data</div>
+    </header>
+
+    <section class="status-panel">
+      <div>
+        <p class="label">Vehicle status</p>
+        <p id="status" class="status-value">--</p>
+      </div>
+      <div>
+        <p id="timestamp" class="timestamp">Last update: --</p>
+        <p id="message" class="message">Open this page from localhost to read live data.</p>
+      </div>
+    </section>
+
+    <section class="dashboard-grid">
+      <article class="metric">
+        <span>Speed</span>
+        <strong id="speed">--</strong>
+        <small>km/h</small>
+      </article>
+      <article class="metric">
+        <span>Battery</span>
+        <strong id="batteryPercent">--</strong>
+        <small>%</small>
+      </article>
+      <article class="metric">
+        <span>Voltage</span>
+        <strong id="batteryVoltage">--</strong>
+        <small>V</small>
+      </article>
+      <article class="metric">
+        <span>Current</span>
+        <strong id="current">--</strong>
+        <small>A</small>
+      </article>
+      <article class="metric">
+        <span>Power</span>
+        <strong id="power">--</strong>
+        <small>W</small>
+      </article>
+      <article class="metric">
+        <span>Motor Temp</span>
+        <strong id="motorTemp">--</strong>
+        <small>C</small>
+      </article>
+      <article class="metric">
+        <span>Controller Temp</span>
+        <strong id="controllerTemp">--</strong>
+        <small>C</small>
+      </article>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
