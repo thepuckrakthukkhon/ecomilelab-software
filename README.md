@@ -87,6 +87,7 @@ Prototype ใช้ JSON เป็น format หลักในช่วงแ�
 
 Detailed data format documentation is in
 [`docs/telemetry-data-format.md`](docs/telemetry-data-format.md).
+Status rules are documented in [`docs/status-rules.md`](docs/status-rules.md).
 
 ## 5. Data Fields
 
